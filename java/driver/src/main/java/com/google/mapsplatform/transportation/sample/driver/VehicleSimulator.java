@@ -39,6 +39,13 @@ class VehicleSimulator {
     }
   }
 
+  void setLocation(Double latitude, Double longitude) {
+    Waypoint.Point userLocation = new Waypoint.Point();
+    userLocation.setLatitude(latitude);
+    userLocation.setLongitude(longitude);
+    this.setLocation(userLocation);
+  }
+
   /**
    * Starts a simulation to the location defined by {@link #setLocation(Waypoint.Point)} along a
    * route calculated by the Navigator.

@@ -48,7 +48,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      app:layout_constraintGuide_percent="0.8" />
+      app:layout_constraintGuide_percent="0.70" />
   <androidx.cardview.widget.CardView
       android:id="@+id/trip_status_cardView"
       android:layout_width="match_parent"
@@ -61,12 +61,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+      <fragment
+              android:id="@+id/autocomplete_fragment"
+              android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+              android:layout_width="match_parent"
+              android:layout_height="36dp"
+              android:layout_marginEnd="36dp"
+              android:layout_marginStart="36dp"
+              android:background="@drawable/edittext_border"
+              />
       <TextView
           android:id="@+id/tripStatus"
           style="@style/TextAppearance.AppCompat.Title"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_margin="@dimen/text_margin_start_end"
+          android:layout_margin="35dp"
           android:fontFamily="@font/roboto_bold"
           android:text="@string/state_initial"
           android:textColor="@color/primaryColor"
@@ -84,10 +93,8 @@
             android:background="@drawable/ic_add_grey_36dp"
             android:enabled="true"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tripStatus"
-            app:layout_constraintTop_toTopOf="parent"
-      />
+            app:layout_constraintEnd_toEndOf="@id/autocomplete_fragment"
+            app:layout_constraintTop_toBottomOf="@id/autocomplete_fragment" />
       <TextView
           android:id="@+id/eta"
           android:layout_width="wrap_content"

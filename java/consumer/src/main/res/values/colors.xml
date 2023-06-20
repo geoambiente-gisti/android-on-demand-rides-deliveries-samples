@@ -23,9 +23,9 @@
   <color name="primaryColorDark">#3b4e5e</color>
   <color name="splashColor">#266329</color>
 
-  <color name="actionable">#718394</color>
+  <color name="actionable">#FF8230</color>
   <color name="disabled">#eeeeee</color>
-  <color name="actionableImportant">#4285F4</color>
+  <color name="actionableImportant">#F8BF4F</color>
   <color name="pickupRelatedColor">#34A853</color>
 
   <color name="cardInfoText">#757575</color>

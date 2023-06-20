@@ -32,6 +32,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +47,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -60,18 +64,25 @@ import com.google.android.libraries.mapsplatform.transportation.consumer.view.Co
 import com.google.android.libraries.mapsplatform.transportation.consumer.view.ConsumerGoogleMap;
 import com.google.android.libraries.mapsplatform.transportation.consumer.view.ConsumerGoogleMap.ConsumerMapReadyCallback;
 import com.google.android.libraries.mapsplatform.transportation.consumer.view.ConsumerMapView;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.mapsplatform.transportation.sample.consumer.provider.ProviderUtils;
 import com.google.mapsplatform.transportation.sample.consumer.provider.model.TripData;
 import com.google.mapsplatform.transportation.sample.consumer.state.AppStates;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 
+import com.google.android.gms.common.api.Status;
+
 /** Main activity for the sample application. */
 public class SampleAppActivity extends AppCompatActivity
-    implements ConsumerViewModel.JourneySharingListener {
+    implements ConsumerViewModel.JourneySharingListener, DirectionsFetcher.OnDirectionsTaskCompleted{
 
   private static final String TAG = "SampleAppActivity";
 
@@ -79,12 +90,12 @@ public class SampleAppActivity extends AppCompatActivity
   /** Default zoom of initial map state. */
   private static final int DEFAULT_ZOOM = 16;
   /** Default Map location if failed to receive FLP location. Defaulted to Google MTV. */
-  private static final LatLng DEFAULT_MAP_LOCATION = new LatLng(37.423061, -122.084051);
+  private static final LatLng DEFAULT_MAP_LOCATION = new LatLng(-23.208249, -45.951878);
 
   // Default padding used when moving the camera within the bounds of the trip preview polyline.
   private static final int TRIP_PREVIEW_CAMERA_PADDING = 48;
   // Default color used for the trip preview polyline.
-  private static final int TRIP_PREVIEW_POLYLINE_COLOR = Color.rgb(69, 151, 255);
+  private static final int TRIP_PREVIEW_POLYLINE_COLOR = Color.rgb(255, 130, 48);
 
   // The current journey sharing trip status.
   private TextView tripStatusView;
@@ -134,6 +145,8 @@ public class SampleAppActivity extends AppCompatActivity
   // Session monitoring the current active trip.
   @Nullable private JourneySharingSession journeySharingSession;
 
+  private AutocompleteSupportFragment autocompleteSupportFragment;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -157,12 +170,24 @@ public class SampleAppActivity extends AppCompatActivity
   private void initializeSdk() {
     showStartupLocation();
 
+    Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+
+    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.TYPES, Place.Field.LAT_LNG);
+
+    // Configurar o AutocompleteSupportFragment
+    autocompleteSupportFragment = (AutocompleteSupportFragment)
+            getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+    autocompleteSupportFragment.setPlaceFields(fields);
+
+
+
     consumerMapView.getConsumerGoogleMapAsync(
         new ConsumerMapReadyCallback() {
           @Override
           public void onConsumerMapReady(ConsumerGoogleMap consumerGoogleMap) {
             // Safe to do so as controller will only be nullified during consumerMap's onDestroy()
             consumerController = requireNonNull(consumerGoogleMap.getConsumerController());
+
             Task<ConsumerApi> consumerApiTask =
                 ConsumerApi.initialize(
                     SampleAppActivity.this,
@@ -178,6 +203,84 @@ public class SampleAppActivity extends AppCompatActivity
             googleMap = consumerGoogleMap;
             centerCameraToLastLocation();
             setupMapListener();
+
+            String styleJson =
+                    "[{ " +
+                            "  \"featureType\": \"poi.business\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.attraction\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.government\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.medical\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.park\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.place_of_worship\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.sports_complex\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}, " +
+                            "{ " +
+                            "  \"featureType\": \"poi.school\", " +
+                            "  \"elementType\": \"all\", " +
+                            "  \"stylers\": [ " +
+                            "    { " +
+                            "      \"visibility\": \"off\" " +
+                            "    } " +
+                            "  ] " +
+                            "}]";
+
+            MapStyleOptions styleOptions = new MapStyleOptions(styleJson);
+            googleMap.setMapStyle(styleOptions);
+
           }
         },
         /* fragmentActivity= */ this,
@@ -231,7 +334,8 @@ public class SampleAppActivity extends AppCompatActivity
             task -> {
               if (task.isSuccessful() && task.getResult() != null) {
                 Location location = task.getResult();
-                lastLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                // lastLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                lastLocation = DEFAULT_MAP_LOCATION;
               } else {
                 lastLocation = DEFAULT_MAP_LOCATION;
               }
@@ -262,6 +366,26 @@ public class SampleAppActivity extends AppCompatActivity
               consumerViewModel.updateLocationPointForState(cameraLocation);
               updateMarkerBasedOnState(terminalLocation);
             });
+
+    // Definir um ouvinte para lidar com a seleção do local
+    autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+      @Override
+      public void onPlaceSelected(@NonNull Place place) {
+        // Lidar com a seleção do local
+        lastLocation = place.getLatLng();
+
+        Log.i("Last Location: ", lastLocation.toString());
+        centerCameraToLastLocation();
+      }
+
+      @Override
+      public void onError(@NonNull Status status) {
+        // Lidar com erros de Autocomplete
+        Toast.makeText(SampleAppActivity.this, "Erro: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
+      }
+    });
+
   }
 
   /**
@@ -647,7 +771,19 @@ public class SampleAppActivity extends AppCompatActivity
       return;
     }
 
-    PolylineOptions polylineOptions =
+    List<LatLng> fullPath = new ArrayList<>();
+
+    if (intermediateDestinations != null) {
+      fullPath.addAll(intermediateDestinations);
+    }
+
+    fullPath.add(dropoffLocation);
+
+    DirectionsFetcher directionsFetcher = new DirectionsFetcher(pickupLocation, fullPath, this);
+
+    directionsFetcher.execute();
+
+/*    PolylineOptions polylineOptions =
         new PolylineOptions()
             .width(8.0f)
             .color(TRIP_PREVIEW_POLYLINE_COLOR)
@@ -662,7 +798,7 @@ public class SampleAppActivity extends AppCompatActivity
 
     polylineOptions.add(dropoffLocation);
 
-    tripPreviewPolyline = googleMap.addPolyline(polylineOptions);
+    tripPreviewPolyline = googleMap.addPolyline(polylineOptions);*/
   }
 
   /** Centers the camera within the bounds of the trip preview polyline. */
@@ -759,5 +895,21 @@ public class SampleAppActivity extends AppCompatActivity
      */
     consumerViewModel.unregisterTripCallback();
     stopJourneySharing();
+  }
+
+  @Override
+  public void onDirectionsTaskCompleted(List<LatLng> points) {
+    if (points != null) {
+      PolylineOptions polylineOptions =
+              new PolylineOptions()
+                      .width(8.0f)
+                      .color(TRIP_PREVIEW_POLYLINE_COLOR)
+                      .geodesic(true)
+                      .addAll(points);
+
+      Log.i("Polyline", polylineOptions.toString());
+
+      tripPreviewPolyline = googleMap.addPolyline(polylineOptions);
+    }
   }
 }

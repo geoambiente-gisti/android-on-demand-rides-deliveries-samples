@@ -127,6 +127,8 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
     authTokenFactory = new TripAuthTokenFactory(application, executor);
 
     vehicleIdStore = new VehicleIdStore(context);
+
+    vehicleSimulator.setLocation(-23.200083, -45.936895);
   }
 
   @Override
@@ -482,6 +484,7 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
     navigator.clearDestinations();
 
     vehicleSimulator.unsetLocation();
+    vehicleSimulator.setLocation(-23.200083, -45.936895);
   }
 
   private void setWaypointDestination(Waypoint waypoint) {

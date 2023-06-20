@@ -60,8 +60,13 @@ android {
 
 dependencies {
     api "com.google.auto.value:auto-value-annotations:$autoValueVersion"
+    // Also include the Google Places SDK, which is used by this example, but
+    // isn't required by the Navigation SDK.
+    api "com.google.android.libraries.places:places:2.5.0"
     annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.google.maps.android:android-maps-utils:2.3.0"
+    implementation "com.google.maps:google-maps-services:2.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$liveDataVersion"
