@@ -475,7 +475,7 @@ public class SampleAppActivity extends AppCompatActivity
           getOtherRiderStringResourceId(consumerViewModel.getOtherTripWaypointType()));
 
       actionButton.setVisibility(View.INVISIBLE);
-      isSharedTripTypeSwitch.setVisibility(View.GONE);
+/*      isSharedTripTypeSwitch.setVisibility(View.GONE);*/
       return;
     }
 
@@ -488,7 +488,7 @@ public class SampleAppActivity extends AppCompatActivity
           setTripStatusTitle(R.string.state_new);
         }
         actionButton.setVisibility(View.INVISIBLE);
-        isSharedTripTypeSwitch.setVisibility(View.GONE);
+/*        isSharedTripTypeSwitch.setVisibility(View.GONE);*/
         break;
       case TripStatus.ENROUTE_TO_PICKUP:
         removeAllMarkers();
@@ -565,7 +565,7 @@ public class SampleAppActivity extends AppCompatActivity
         dropoffPin.setVisibility(View.INVISIBLE);
         tripStatusView.setVisibility(View.INVISIBLE);
         addStopButton.setVisibility(View.GONE);
-        isSharedTripTypeSwitch.setVisibility(View.VISIBLE);
+/*        isSharedTripTypeSwitch.setVisibility(View.VISIBLE);*/
         break;
 
       case JOURNEY_SHARING:
@@ -643,8 +643,8 @@ public class SampleAppActivity extends AppCompatActivity
   }
 
   private void hideTripData() {
-    tripIdView.setVisibility(View.INVISIBLE);
-    vehicleIdView.setVisibility(View.INVISIBLE);
+/*    tripIdView.setVisibility(View.INVISIBLE);
+    vehicleIdView.setVisibility(View.INVISIBLE);*/
     etaView.setVisibility(View.INVISIBLE);
     remainingDistanceView.setVisibility(View.INVISIBLE);
   }
@@ -657,20 +657,20 @@ public class SampleAppActivity extends AppCompatActivity
 
   /** Updates the displayed trip Id. */
   private void displayTripId(@Nullable String tripId) {
-    if (tripId == null) {
+/*    if (tripId == null) {
       tripIdView.setText("");
       return;
     }
     tripIdView.setText(getResources().getString(R.string.trip_id_label, tripId));
-    tripIdView.setVisibility(View.VISIBLE);
+    tripIdView.setVisibility(View.VISIBLE);*/
   }
 
   private void displayTripInfo(@Nullable TripInfo tripInfo) {
     if (tripInfo == null || tripInfo.getVehicleId() == null) {
-      vehicleIdView.setText("");
+ //     vehicleIdView.setText("");
       return;
     }
-    vehicleIdView.setText(
+ /*   vehicleIdView.setText(
         getResources().getString(R.string.vehicle_id_label, tripInfo.getVehicleId()));
 
     displayTripStatus(tripInfo.getTripStatus());
@@ -680,7 +680,7 @@ public class SampleAppActivity extends AppCompatActivity
                 || tripInfo.getTripStatus() == TripStatus.CANCELED)
             ? View.INVISIBLE
             : View.VISIBLE;
-    vehicleIdView.setVisibility(visibility);
+/*    vehicleIdView.setVisibility(visibility);*/
   }
 
   private void onActionButtonTapped(View view) {
@@ -837,8 +837,8 @@ public class SampleAppActivity extends AppCompatActivity
   private void initViews() {
     // Find the UI views for later updates.
     tripStatusView = findViewById(R.id.tripStatus);
-    tripIdView = findViewById(R.id.tripId);
-    vehicleIdView = findViewById(R.id.vehicleId);
+/*    tripIdView = findViewById(R.id.tripId);
+    vehicleIdView = findViewById(R.id.vehicleId);*/
     etaView = findViewById(R.id.eta);
     remainingDistanceView = findViewById(R.id.remainingDistance);
     consumerMapView = findViewById(R.id.consumer_map_view);
@@ -849,9 +849,9 @@ public class SampleAppActivity extends AppCompatActivity
     addStopButton = findViewById(R.id.addStopButton);
     addStopButton.setOnClickListener(this::onAddStopButtonTapped);
 
-    isSharedTripTypeSwitch = findViewById(R.id.is_shared_trip_type_switch);
+/*    isSharedTripTypeSwitch = findViewById(R.id.is_shared_trip_type_switch);
     isSharedTripTypeSwitch.setOnCheckedChangeListener(
-        (view, isChecked) -> consumerViewModel.setIsSharedTripType(isChecked));
+        (view, isChecked) -> consumerViewModel.setIsSharedTripType(isChecked));*/
 
     resetActionButton();
   }
@@ -898,7 +898,7 @@ public class SampleAppActivity extends AppCompatActivity
   }
 
   @Override
-  public void onDirectionsTaskCompleted(List<LatLng> points) {
+  public void onDirectionsTaskCompleted(List<LatLng> points, Long distance, Long duration) {
     if (points != null) {
       PolylineOptions polylineOptions =
               new PolylineOptions()
@@ -910,6 +910,12 @@ public class SampleAppActivity extends AppCompatActivity
       Log.i("Polyline", polylineOptions.toString());
 
       tripPreviewPolyline = googleMap.addPolyline(polylineOptions);
+
+      duration = ConvertionUtils.convertSecondsToMilliseconds(duration);
+
+      final Date current = new Date();
+      this.displayEta(duration + current.getTime());
+      this.displayRemainingDistance(distance.intValue());
     }
   }
 }

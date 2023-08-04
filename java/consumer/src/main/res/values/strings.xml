@@ -28,17 +28,17 @@
   <string name="msg_provider_connection_error" translatable="false">Can\'t connect to Provider backend</string>
 
   <!-- Begin state titles. -->
-  <string name="state_initial" translatable="false">Waiting for trip</string>
+  <string name="state_initial" translatable="false">Esperando por Viagem</string>
   <!-- Waiting to find a driver. -->
-  <string name="state_new" translatable="false">Waiting to find a driver</string>
+  <string name="state_new" translatable="false">Procurando Motorista</string>
   <!-- Selecting pickup point. -->
-  <string name="state_select_pickup" translatable="false">Choose a pickup location</string>
+  <string name="state_select_pickup" translatable="false">Selecione o ponto de Partida</string>
   <!-- Selecting dropoff point. -->
-  <string name="state_select_dropoff" translatable="false">Choose a drop-off location</string>
+  <string name="state_select_dropoff" translatable="false">Selecione o Destino</string>
   <!-- Enroute to pickup state [CHAR_LIMIT=50] -->
-  <string name="state_enroute_to_pickup" translatable="false">Driver is arriving at pickup</string>
+  <string name="state_enroute_to_pickup" translatable="false">Motorista chegando no ponto de Partida</string>
   <!-- Driver arrived at pickup state [CHAR_LIMIT=50] -->
-  <string name="state_arrived_at_pickup" translatable="false">Driver arrived at pickup</string>
+  <string name="state_arrived_at_pickup" translatable="false">Motorista chegou no ponto de Partida</string>
    <!-- Driver is picking up other rider [CHAR_LIMIT=50] -->
   <string name="state_picking_up_other_rider" translatable="false">Driver is picking another rider up</string>
   <!-- Driver is dropping off other rider [CHAR_LIMIT=50] -->
@@ -47,30 +47,30 @@
   <string name="state_stopping_for_other_rider" translatable="false">Driver is stopping for another rider</string>
 
   <!-- Enroute to dropoff state [CHAR_LIMIT=50] -->
-  <string name="state_enroute_to_dropoff" translatable="false">Driving to drop-off</string>
+  <string name="state_enroute_to_dropoff" translatable="false">Indo para o Destino</string>
   <!-- Enroute to intermediate destination state [CHAR_LIMIT=50] -->
-  <string name="state_enroute_to_intermediate_destination" translatable="false">Driving to stop</string>
+  <string name="state_enroute_to_intermediate_destination" translatable="false">Indo para a Parada</string>
   <!-- Drived arrived to intermediate destination [CHAR_LIMIT=50] -->
-  <string name="state_arrived_at_intermediate_destination" translatable="false">Driver arrived at stop</string>
+  <string name="state_arrived_at_intermediate_destination" translatable="false">Motorista chegou na Parada</string>
   <!-- Trip completed state [CHAR_LIMIT=50] -->
-  <string name="state_end_of_trip" translatable="false">End of trip</string>
+  <string name="state_end_of_trip" translatable="false">Fim da Viagem</string>
   <!-- End state titles. -->
 
   <!--Label for the Share trip switch [CHAR_LIMIT=50] -->
-  <string name="shared_trip" translatable="false">Shared Trip</string>
+  <string name="shared_trip" translatable="false">Viagem Compartilhada</string>
 
   <!--Label for Trip Match [CHAR_LIMIT=50] -->
-  <string name="trip_id_label" translatable="false">Trip Id: %1$s</string>
+  <string name="trip_id_label" translatable="false">Identificador da Viagem: %1$s</string>
 
   <!--Label for Vehicle [CHAR_LIMIT=50] -->
-  <string name="vehicle_id_label" translatable="false">Vehicle Id: %1$s</string>
+  <string name="vehicle_id_label" translatable="false">Identificador do Veículo: %1$s</string>
 
   <!--Initial Button Label -->
-  <string name="request_button_label" translatable="false">Request Trip</string>
-  <string name="dropoff_label" translatable="false">Confirm Drop-off</string>
-  <string name="pickup_label" translatable="false">Confirm Pickup</string>
-   <string name="confirm_trip_label" translatable="false">Confirm Trip</string>
-  <string name="add_stop_label" translatable="false">Add Stop</string>
+  <string name="request_button_label" translatable="false">Requisitar Viagem</string>
+  <string name="dropoff_label" translatable="false">Confirmar Destino</string>
+  <string name="pickup_label" translatable="false">Confirmar Partida</string>
+   <string name="confirm_trip_label" translatable="false">Confirmar Viagem</string>
+  <string name="add_stop_label" translatable="false">Adicionar Parada</string>
   <!-- String for formatting eta [CHAR_LIMIT=40] -->
   <plurals name="eta_format_string" translatable="false">
     <item quantity="one">%d min</item>
@@ -78,7 +78,7 @@
   </plurals>
 
   <!-- Indicates the eta is less than 1 minute. [CHAR_LIMIT=50] -->
-  <string name="eta_within_one_minute" translatable="false">Within 1 minute</string>
+  <string name="eta_within_one_minute" translatable="false">Dentro de 1 minuto</string>
 
   <!-- String for formatting eta in meters [CHAR_LIMIT=40] -->
   <string name="distance_format_string_meters" translatable="false">&#8226; %dm</string>

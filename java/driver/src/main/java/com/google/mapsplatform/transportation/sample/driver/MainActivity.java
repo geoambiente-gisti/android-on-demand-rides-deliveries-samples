@@ -188,19 +188,21 @@ public final class MainActivity extends AppCompatActivity implements Presenter {
 
   @Override
   public void showTripId(String tripId) {
-    if (!tripId.equals(VehicleController.NO_TRIP_ID)) {
+    tripIdText.setVisibility(View.INVISIBLE);
+
+/*    if (!tripId.equals(VehicleController.NO_TRIP_ID)) {
       tripIdText.setText(getResources().getString(R.string.trip_id_label, tripId));
       return;
     }
 
     String noTripFoundText = getResources().getString(R.string.status_unknown);
-    tripIdText.setText(getResources().getString(R.string.trip_id_label, noTripFoundText));
+    tripIdText.setText(getResources().getString(R.string.trip_id_label, noTripFoundText));*/
   }
 
   @Override
   public void showMatchedTripIds(List<String> tripIds) {
-    matchedTripIdsText.setVisibility(View.VISIBLE);
-
+    matchedTripIdsText.setVisibility(View.INVISIBLE);
+/*
     if (tripIds.isEmpty()) {
       String noTripFoundText = getResources().getString(R.string.status_unknown);
 
@@ -212,7 +214,7 @@ public final class MainActivity extends AppCompatActivity implements Presenter {
 
     String text = Joiner.on(", ").join(tripIds);
 
-    matchedTripIdsText.setText(getResources().getString(R.string.matched_trip_ids_label, text));
+    matchedTripIdsText.setText(getResources().getString(R.string.matched_trip_ids_label, text));*/
   }
 
   @Override

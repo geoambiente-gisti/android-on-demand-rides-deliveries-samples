@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
+import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TravelMode;
@@ -61,8 +62,16 @@ public class DirectionsFetcher extends AsyncTask<Void, Void, DirectionsResult> {
         if (directionsResult != null) {
             List<LatLng> decodedPath = decodePolyline(directionsResult.routes[0].overviewPolyline.getEncodedPath());
 
+            Long duration = 0L;
+            Long distance = 0L;
+
+            for (DirectionsLeg leg : directionsResult.routes[0].legs) {
+                duration += leg.duration.inSeconds;
+                distance += leg.distance.inMeters;
+            }
+
             if (listener != null) {
-                listener.onDirectionsTaskCompleted(decodedPath);
+                listener.onDirectionsTaskCompleted(decodedPath, distance, duration);
             }
         }
     }
@@ -110,6 +119,6 @@ public class DirectionsFetcher extends AsyncTask<Void, Void, DirectionsResult> {
     }
 
     public interface OnDirectionsTaskCompleted {
-        void onDirectionsTaskCompleted(List<LatLng> points);
+        void onDirectionsTaskCompleted(List<LatLng> points, Long distance, Long duration);
     }
 }

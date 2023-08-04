@@ -19,9 +19,9 @@
     <color name="dividerColor">#FFFFFF</color>
 
     <!-- App related colors -->
-    <color name="primaryColor">#4a6176</color>
+    <color name="primaryColor">#FF8230</color>
     <color name="primaryColorDark">#3b4e5e</color>
-    <color name="actionable">#718394</color>
+    <color name="actionable">#FF8230</color>
     <color name="actionableImportant">#4285f4</color>
 
     <!-- text -->

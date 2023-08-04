@@ -124,39 +124,7 @@
           android:layout_height="wrap_content"
           android:orientation="vertical"
           app:layout_constraintGuide_begin="@dimen/status_card_gutter" />
-      <TextView
-          android:id="@+id/vehicleId"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:fontFamily="@font/roboto"
-          android:text="@string/vehicle_id_label"
-          android:textColor="@color/cardInfoText"
-          android:visibility="invisible"
-          app:layout_constraintStart_toStartOf="@+id/guideline2"
-          app:layout_constraintTop_toBottomOf="@+id/eta" />
-      <TextView
-          android:id="@+id/tripId"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:fontFamily="@font/roboto"
-          android:text="@string/trip_id_label"
-          android:textColor="@color/cardInfoText"
-          android:visibility="invisible"
-          app:layout_constraintStart_toStartOf="@+id/guideline2"
-          app:layout_constraintTop_toBottomOf="@+id/vehicleId" />
-      <Switch
-          android:id="@+id/is_shared_trip_type_switch"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:visibility="gone"
-          android:text="@string/shared_trip"
-          android:fontFamily="@font/roboto"
-          android:textColor="@color/primaryColor"
-          android:layout_marginTop="@dimen/text_margin_start_end"
-          android:layout_marginStart="@dimen/text_margin_start_end"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+
       <Button
           android:id="@+id/actionButton"
           android:layout_width="0dp"
