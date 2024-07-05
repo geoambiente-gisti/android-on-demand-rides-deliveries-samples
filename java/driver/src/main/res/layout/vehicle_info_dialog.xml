@@ -23,7 +23,9 @@
     android:paddingTop="@dimen/dialog_margin"
     android:paddingBottom="@dimen/dialog_margin"
     android:paddingLeft="@dimen/dialog_margin"
-    android:paddingRight="@dimen/dialog_margin">
+    android:paddingRight="@dimen/dialog_margin"
+    tools:ignore="MissingConstraints"
+>
 
   <TextView
       android:id="@+id/vehicle_id_label"
