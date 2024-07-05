@@ -17,9 +17,6 @@ plugins {
 }
 
 repositories {
-    maven {
-        url "artifactregistry://us-west2-maven.pkg.dev/gmp-artifacts/transportation"
-    }
 }
 
 apply plugin: 'com.android.application'
