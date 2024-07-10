@@ -4,17 +4,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TravelMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DirectionsFetcher extends AsyncTask<Void, Void, DirectionsResult> {
     private static final String TAG = "DirectionsFetcher";
@@ -37,13 +36,15 @@ public class DirectionsFetcher extends AsyncTask<Void, Void, DirectionsResult> {
                     .apiKey(API_KEY)
                     .build();
 
+            com.google.maps.model.LatLng[] waypoints = destinations.parallelStream()
+                    .map(latLng -> new com.google.maps.model.LatLng(latLng.latitude, latLng.longitude))
+                    .collect(Collectors.toList())
+                    .toArray(com.google.maps.model.LatLng[]::new);
+
             DirectionsApiRequest request = DirectionsApi.newRequest(context)
                     .mode(TravelMode.DRIVING)
-                    .origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude));
-
-            for (LatLng destination : destinations) {
-                request = request.waypoints(new com.google.maps.model.LatLng(destination.latitude, destination.longitude));
-            }
+                    .origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude))
+                    .waypoints(waypoints);
 
             request = request.destination(new com.google.maps.model.LatLng(destinations.get(destinations.size() - 1).latitude,
                     destinations.get(destinations.size() - 1).longitude));
