@@ -128,7 +128,8 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
 
     vehicleIdStore = new VehicleIdStore(context);
 
-    vehicleSimulator.setLocation(-23.200083, -45.936895);
+//    vehicleSimulator.setLocation(-23.383806, -53.2931301);// 1	Douradina, PR, 87485-000);
+    vehicleSimulator.setLocation(-23.380642, -53.302926);// Gazin auto posto, Douradina, PR, 87485-000);
   }
 
   @Override
@@ -484,7 +485,8 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
     navigator.clearDestinations();
 
     vehicleSimulator.unsetLocation();
-    vehicleSimulator.setLocation(-23.200083, -45.936895);
+//    vehicleSimulator.setLocation(-23.383806, -53.2931301);// 1	Douradina, PR, 87485-000);
+    vehicleSimulator.setLocation(-23.380642, -53.302926);// Gazin auto posto, Douradina, PR, 87485-000);
   }
 
   private void setWaypointDestination(Waypoint waypoint) {
