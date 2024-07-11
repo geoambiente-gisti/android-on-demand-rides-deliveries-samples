@@ -145,8 +145,7 @@ public class ConsumerViewModel extends AndroidViewModel {
 
   /** Creates a trip in the sample provider. */
   public void createTrip() {
-    String tripType =
-        isSharedTripType.getValue() != null && isSharedTripType.getValue() ? "SHARED" : "EXCLUSIVE";
+    String tripType = "EXCLUSIVE" ;
 
     CreateTripRequest request = new CreateTripRequest();
 
