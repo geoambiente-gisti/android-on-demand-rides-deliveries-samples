@@ -69,6 +69,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.common.collect.ImmutableList;
 import com.google.mapsplatform.transportation.sample.consumer.provider.ProviderUtils;
 import com.google.mapsplatform.transportation.sample.consumer.provider.model.TripData;
 import com.google.mapsplatform.transportation.sample.consumer.state.AppStates;
@@ -194,8 +195,38 @@ public class SampleAppActivity extends AppCompatActivity
                     ProviderUtils.getProviderId(SampleAppActivity.this),
                     new TripAuthTokenFactory(getApplication()));
             consumerApiTask.addOnSuccessListener(
-                consumerApi ->
-                    tripModelManager = requireNonNull(consumerApi.getTripModelManager()));
+                    consumerApi ->
+                    {
+                                    tripModelManager = requireNonNull(consumerApi.getTripModelManager());
+
+
+                      consumerViewModel.setState(CONFIRMING_TRIP);
+                      consumerViewModel.setPickupLocation(new LatLng(-23.383806, -53.2931301));// 1	Douradina, PR, 87485-000);
+
+                      consumerViewModel.setIntermediateDestinations(
+                              ImmutableList.<LatLng>builder()
+                                      .add(new LatLng(-23.617417, -53.205503))// 2	Maria Helena, PR, 87480-000
+//                                      .add(new LatLng(-23.7835985, -53.0757931))// 3	Cruzeiro do Oeste, PR, 87400-000
+//                                      .add(new LatLng(-23.7336166, -52.8710608))// 4	Tapejara, PR, 87430-000
+//                                      .add(new LatLng(-23.2345256, -51.6641137))// 5	Astorga, PR, 86730-000
+//                                      .add(new LatLng(-23.3190277, -51.5544529))// 6	Sabáudia, PR, 86720-000
+//                                      .add(new LatLng(-23.7614697, -51.4122437))// 7	Rio Bom, PR, 86830-000
+//                                      .add(new LatLng(-24.1449805, -51.5062952))// 8	Grandes Rios, PR, 86845-000
+//                                      .add(new LatLng(-24.2554741, -51.2510458))// 9	Rosário do Ivai, PR, 86850-000
+//                                      .add(new LatLng(-24.3199308, -51.315473))// 10	Rio Branco do Ivaí, PR, 86848-000
+//                                      .add(new LatLng(-24.5186296, -51.6645259))// 11	Manoel Ribas, PR. 85260-000
+//                                      .add(new LatLng(-24.179855, -51.6905502))// 12	Jardim Alegre, PR, 86860-000
+//                                      .add(new LatLng(-24.0802016, -51.7445061))// 13	Lunardelli, PR, 86935-000
+//                                      .add(new LatLng(-23.8974827, -52.0003599))// 14	Fênix, PR, 86950-000
+                                      .build());
+                      consumerViewModel.setDropoffLocation(new LatLng(-23.8495745, -52.1329665));// 15	Quintal do Sol, PR, 87265-000
+                      actionButton.setText(R.string.confirm_trip_label);
+                      drawTripPreviewPolyline();
+                      centerCameraForTripPreview();
+                      consumerViewModel.createTrip();
+                    }
+
+            );
             consumerApiTask.addOnFailureListener(
                 task -> Log.e(TAG, "ConsumerApi Initialization Error:\n" + task.getMessage()));
             ConsumerMarkerUtils.setCustomMarkers(consumerController, SampleAppActivity.this);

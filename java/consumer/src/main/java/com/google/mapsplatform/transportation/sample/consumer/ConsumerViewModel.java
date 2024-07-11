@@ -382,6 +382,9 @@ public class ConsumerViewModel extends AndroidViewModel {
             .add(destination)
             .build());
   }
+  public void setIntermediateDestinations(ImmutableList<LatLng> locations) {
+    intermediateDestinations.setValue(locations);
+  }
 
   /** Retrieves the list of intermediate destinations added so far to the trip. */
   public List<LatLng> getIntermediateDestinations() {
