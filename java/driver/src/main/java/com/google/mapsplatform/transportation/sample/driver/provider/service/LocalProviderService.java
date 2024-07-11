@@ -96,6 +96,11 @@ public class LocalProviderService {
 
     return updateTrip(tripState.tripId(), updateBody);
   }
+    public ListenableFuture<TripModel> cancelTrip(String  tripId) {
+        TripUpdateBody updateBody = new TripUpdateBody();
+        updateBody.setStatus(TripStatus.CANCELED.toString());
+        return updateTrip(tripId, updateBody);
+    }
 
   /**
    * Creates or updates a 'Vehicle' in the sample provider based on the given settings.

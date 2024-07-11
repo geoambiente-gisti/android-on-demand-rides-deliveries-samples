@@ -311,10 +311,15 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
 
   /** Cleans up active resources prior to activity onDestroy, mainly to prevent memory leaks. */
   public void cleanUp() {
+    if (currentWaypoint != null) {
+      providerService.cancelTrip(currentWaypoint.getTripId());
+      navigator.stopGuidance();
+    }
     stopVehiclePeriodicUpdate();
 
-    /** Clear existing API instance once we know it won't be needed. */
+	  /** Clear existing API instance once we know it won't be needed. */
     RidesharingDriverApi.clearInstance();
+    matchedTripIds=ImmutableList.of();
   }
 
   private void startVehiclePeriodicUpdate() {
