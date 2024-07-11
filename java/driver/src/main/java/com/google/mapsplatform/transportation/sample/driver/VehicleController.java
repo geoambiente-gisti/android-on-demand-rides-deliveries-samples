@@ -510,7 +510,7 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
             .setLatLng(
                 waypoint.getLocation().getPoint().getLatitude(),
                 waypoint.getLocation().getPoint().getLongitude())
-            .setTitle(waypoint.getWaypointType())
+            .setTitle(TripUtils.WaypointTypeTitleMap.getOrDefault(waypoint.getWaypointType(),waypoint.getWaypointType()))
             .build();
 
     // If the loaded trip has a 'routeToken' generated it would be set to NavSDK here.
@@ -534,7 +534,7 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
                 .setLatLng(
                     waypoint.getLocation().getPoint().getLatitude(),
                     waypoint.getLocation().getPoint().getLongitude())
-                .setTitle(waypoint.getWaypointType())
+                .setTitle(TripUtils.WaypointTypeTitleMap.getOrDefault(waypoint.getWaypointType(),waypoint.getWaypointType()))
                 .build());
 
     pendingRoute.setOnResultListener(
