@@ -46,6 +46,7 @@ import com.google.mapsplatform.transportation.sample.driver.state.TripState;
 import com.google.mapsplatform.transportation.sample.driver.state.TripStatus;
 import com.google.mapsplatform.transportation.sample.driver.utils.TripUtils;
 import java.lang.ref.WeakReference;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,6 +136,15 @@ public class VehicleController implements VehicleStateService.VehicleStateListen
   @Override
   public void onVehicleStateUpdate(VehicleModel updatedVehicle) {
     waypoints = updatedVehicle.getWaypoints();
+
+    // verifica se o pickup point está presente na lista, mas não está no primeiro indice.
+    if (!waypoints.isEmpty()
+            && waypoints.stream().anyMatch(w -> w.getWaypointType().equals(TripUtils.PICKUP_WAYPOINT_TYPE))
+            && !waypoints.get(0).getWaypointType().equals(TripUtils.PICKUP_WAYPOINT_TYPE)) {
+      // reordena a lista colocando o pickup point no começo
+      waypoints.sort(Comparator.comparing(waypoint -> TripUtils.OrderedWaypointType.valueOf(waypoint.getWaypointType())
+      ));
+    }
     matchedTripIds = updatedVehicle.getCurrentTripsIds();
 
     // Reset and recalculate waypoints every server state update.

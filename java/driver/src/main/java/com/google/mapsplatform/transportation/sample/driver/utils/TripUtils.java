@@ -18,14 +18,27 @@ import com.google.mapsplatform.transportation.sample.driver.provider.response.Wa
 import com.google.mapsplatform.transportation.sample.driver.state.TripState;
 import com.google.mapsplatform.transportation.sample.driver.state.TripStatus;
 
+import java.util.Map;
+
 /** Provides utility methods to facilitate Trip state management. */
 public final class TripUtils {
+
   public static final String PICKUP_WAYPOINT_TYPE = "PICKUP_WAYPOINT_TYPE";
 
   public static final String INTERMEDIATE_DESTINATION_WAYPOINT_TYPE =
       "INTERMEDIATE_DESTINATION_WAYPOINT_TYPE";
 
   public static final String DROP_OFF_WAYPOINT_TYPE = "DROP_OFF_WAYPOINT_TYPE";
+
+  public enum OrderedWaypointType {
+    PICKUP_WAYPOINT_TYPE, INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, DROP_OFF_WAYPOINT_TYPE
+  }
+
+  public static final Map<OrderedWaypointType, String> WaypointTypeTitleMap = Map.of(
+          OrderedWaypointType.PICKUP_WAYPOINT_TYPE, "Parada Intermediária",
+          OrderedWaypointType.INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, "Embarque",
+          OrderedWaypointType.DROP_OFF_WAYPOINT_TYPE, "Destino"
+  );
 
   public static final String EXCLUSIVE_TRIP_TYPE = "EXCLUSIVE";
 
