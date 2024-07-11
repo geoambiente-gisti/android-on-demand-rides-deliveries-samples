@@ -34,10 +34,10 @@ public final class TripUtils {
     PICKUP_WAYPOINT_TYPE, INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, DROP_OFF_WAYPOINT_TYPE
   }
 
-  public static final Map<OrderedWaypointType, String> WaypointTypeTitleMap = Map.of(
-          OrderedWaypointType.PICKUP_WAYPOINT_TYPE, "Parada Intermediária",
-          OrderedWaypointType.INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, "Embarque",
-          OrderedWaypointType.DROP_OFF_WAYPOINT_TYPE, "Destino"
+  public static final Map<String, String> WaypointTypeTitleMap = Map.of(
+          PICKUP_WAYPOINT_TYPE, "Parada Intermediária",
+          INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, "Embarque",
+          DROP_OFF_WAYPOINT_TYPE, "Destino"
   );
 
   public static final String EXCLUSIVE_TRIP_TYPE = "EXCLUSIVE";
