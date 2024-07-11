@@ -35,8 +35,8 @@ public final class TripUtils {
   }
 
   public static final Map<String, String> WaypointTypeTitleMap = Map.of(
-          PICKUP_WAYPOINT_TYPE, "Parada Intermediária",
-          INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, "Embarque",
+          PICKUP_WAYPOINT_TYPE, "Embarque",
+          INTERMEDIATE_DESTINATION_WAYPOINT_TYPE, "Parada Intermediária",
           DROP_OFF_WAYPOINT_TYPE, "Destino"
   );
 
