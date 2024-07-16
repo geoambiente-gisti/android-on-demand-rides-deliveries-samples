@@ -32,13 +32,13 @@
   <!-- Waiting to find a driver. -->
   <string name="state_new" translatable="false">Procurando Motorista</string>
   <!-- Selecting pickup point. -->
-  <string name="state_select_pickup" translatable="false">Selecione o ponto de Partida</string>
+  <string name="state_select_pickup" translatable="false">Selecione o ponto de coleta</string>
   <!-- Selecting dropoff point. -->
   <string name="state_select_dropoff" translatable="false">Selecione o Destino</string>
   <!-- Enroute to pickup state [CHAR_LIMIT=50] -->
-  <string name="state_enroute_to_pickup" translatable="false">Motorista chegando no ponto de Partida</string>
+  <string name="state_enroute_to_pickup" translatable="false">Motorista chegando no ponto de coleta</string>
   <!-- Driver arrived at pickup state [CHAR_LIMIT=50] -->
-  <string name="state_arrived_at_pickup" translatable="false">Motorista chegou no ponto de Partida</string>
+  <string name="state_arrived_at_pickup" translatable="false">Motorista chegou no ponto de coleta</string>
    <!-- Driver is picking up other rider [CHAR_LIMIT=50] -->
   <string name="state_picking_up_other_rider" translatable="false">Driver is picking another rider up</string>
   <!-- Driver is dropping off other rider [CHAR_LIMIT=50] -->
@@ -49,9 +49,9 @@
   <!-- Enroute to dropoff state [CHAR_LIMIT=50] -->
   <string name="state_enroute_to_dropoff" translatable="false">Indo para o Destino</string>
   <!-- Enroute to intermediate destination state [CHAR_LIMIT=50] -->
-  <string name="state_enroute_to_intermediate_destination" translatable="false">Indo para a Parada</string>
+  <string name="state_enroute_to_intermediate_destination" translatable="false">Indo para a coleta/entrega</string>
   <!-- Drived arrived to intermediate destination [CHAR_LIMIT=50] -->
-  <string name="state_arrived_at_intermediate_destination" translatable="false">Motorista chegou na Parada</string>
+  <string name="state_arrived_at_intermediate_destination" translatable="false">Motorista chegou na coleta/entrega</string>
   <!-- Trip completed state [CHAR_LIMIT=50] -->
   <string name="state_end_of_trip" translatable="false">Fim da Viagem</string>
   <!-- End state titles. -->

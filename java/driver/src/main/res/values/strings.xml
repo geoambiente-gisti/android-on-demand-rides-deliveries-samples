@@ -19,15 +19,15 @@
     <!-- Button label to start a trip [CHAR_LIMIT=50] -->
     <string name="button_start_trip">Inciar navegação</string>
     <!-- Button label to indicate arrival at a pickup point [CHAR_LIMIT=50] -->
-    <string name="button_arrived_at_pickup">Chegou ao passageiro</string>
+    <string name="button_arrived_at_pickup">Confirmar coleta inicial</string>
     <!-- Button label to navigate to dropoff point [CHAR_LIMIT=50] -->
     <string name="button_enroute_to_dropoff">Em rota para o Destino</string>
     <!-- Button label to complete a trip [CHAR_LIMIT=50] -->
     <string name="button_trip_complete">Completar Viagem</string>
     <!-- Button label to indicate arrival at an intermediate stop [CHAR_LIMIT=50] -->
-    <string name="button_arrived_at_intermediate_stop">Chegou a uma Parada Intermediária</string>
+    <string name="button_arrived_at_intermediate_stop">Confirmar coleta/entrega</string>
     <!-- Button label to navigate to intermediate stop [CHAR_LIMIT=50] -->
-    <string name="button_enroute_to_intermediate_stop">Em rota para uma Parada Intermediária</string>
+    <string name="button_enroute_to_intermediate_stop">Em rota para uma coleta/entrega</string>
 
     <!-- Waiting for a trip to be assigned [CHAR_LIMIT=50] -->
     <string name="status_idle">Aguardando por uma Viagem</string>
@@ -36,15 +36,15 @@
     <!-- Trip status new [CHAR_LIMIT=50] -->
     <string name="status_new">Nova Viagem</string>
     <!-- Trip status enroute to pickup [CHAR_LIMIT=50] -->
-    <string name="status_enroute_to_pickup">Buscando Passageiro</string>
+    <string name="status_enroute_to_pickup">Em rota para coleta</string>
     <!-- Trip status arrived at pickup [CHAR_LIMIT=50] -->
-    <string name="status_arrived_at_pickup">Chegou ao Passageiro</string>
+    <string name="status_arrived_at_pickup">Chegou na coleta</string>
     <!-- Trip status enroute to dropoff [CHAR_LIMIT=50] -->
-    <string name="status_enroute_to_dropoff">Levando Passageiro ao Destino</string>
+    <string name="status_enroute_to_dropoff">Em rota ao destino final</string>
     <!-- Trip status enroute to intermediate stop [CHAR_LIMIT=50] -->
-    <string name="status_enroute_to_intermediate_location">Em rota para uma Parada Intermediária</string>
+    <string name="status_enroute_to_intermediate_location">Em rota para uma coleta/entrega</string>
     <!-- Trip status arrived to intermediate stop [CHAR_LIMIT=50] -->
-    <string name="status_arrived_to_intermediate_location">Chegou a uma Parada Intermediária</string>
+    <string name="status_arrived_to_intermediate_location">Chegou a uma coleta/entrega</string>
 
     <!-- Trip status complete [CHAR_LIMIT=50] -->
     <string name="status_complete">Viagem Completa</string>
