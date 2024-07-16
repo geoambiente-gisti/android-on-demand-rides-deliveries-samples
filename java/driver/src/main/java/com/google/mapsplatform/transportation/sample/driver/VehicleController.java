@@ -63,7 +63,7 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 public class VehicleController implements VehicleStateService.VehicleStateListener {
 
   // Controls the relative speed of the simulator.
-  private static final float SIMULATOR_SPEED_MULTIPLIER = 5.0f;
+  private static final float SIMULATOR_SPEED_MULTIPLIER = 20.0f;
 
   // Faster location update interval during journey sharing.
   private static final long JOURNEY_SHARING_LOCATION_UPDATE_INTERVAL_SECONDS = 5;
